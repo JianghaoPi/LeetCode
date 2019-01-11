@@ -24,9 +24,23 @@ class Solution(object):
             char_dict[s[i]] = i
         return longest
 
+    def lengthOfLongestSubstring2(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        refer = {}
+        longest = 0
+        start = -1
+        for i in range(len(s)):
+            if s[i] in refer:
+                start = max(start, refer[s[i]])
+            longest = max(longest, i - start)
+            refer[s[i]] = i
+        return longest
 
 if __name__ == "__main__":
     sol = Solution()
     start = time.time()
-    print(sol.lengthOfLongestSubstring("abcabcbb"))
+    print(sol.lengthOfLongestSubstring2("abcabcbb"))
     print(time.time()-start)
